@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linguagens de Programação</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .languages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .language-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .language-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .language-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .language-icon {
+            font-size: 3em;
+            margin-right: 15px;
+        }
+
+        .language-name {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .language-year {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .language-description {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .language-uses {
+            margin-top: 15px;
+        }
+
+        .uses-title {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .use-tag {
+            display: inline-block;
+            background: #f0f0f0;
+            padding: 5px 12px;
+            border-radius: 15px;
+            margin: 5px 5px 5px 0;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 700px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2em;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s;
+        }
+
+        .close-btn:hover {
+            color: #333;
+        }
+
+        .modal h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .modal-section {
+            margin-bottom: 20px;
+        }
+
+        .modal-section h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .code-example {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Linguagens de Programação</h1>
+            <p class="subtitle">Descubra as 5 linguagens que moldam o mundo digital</p>
+        </header>
+
+        <div class="languages-grid">
+            <div class="language-card" onclick="openModal('python')">
+                <div class="language-header">
+                    <div class="language-icon">🐍</div>
+                    <div class="language-name">Python</div>
+                </div>
+                <div class="language-year">Criada em 1991 por Guido van Rossum</div>
+                <div class="language-description">
+                    Linguagem de alto nível, versátil e fácil de aprender. Muito popular em ciência de dados, inteligência artificial e automação.
+                </div>
+                <div class="language-uses">
+                    <div class="uses-title">Principais usos:</div>
+                    <span class="use-tag">IA & Machine Learning</span>
+                    <span class="use-tag">Web Development</span>
+                    <span class="use-tag">Automação</span>
+                    <span class="use-tag">Análise de Dados</span>
+                </div>
+            </div>
+
+            <div class="language-card" onclick="openModal('javascript')">
+                <div class="language-header">
+                    <div class="language-icon">⚡</div>
+                    <div class="language-name">JavaScript</div>
+                </div>
+                <div class="language-year">Criada em 1995 por Brendan Eich</div>
+                <div class="language-description">
+                    A linguagem da web! Essencial para criar sites interativos e aplicações dinâmicas. Roda no navegador e no servidor.
+                </div>
+                <div class="language-uses">
+                    <div class="uses-title">Principais usos:</div>
+                    <span class="use-tag">Desenvolvimento Web</span>
+                    <span class="use-tag">Apps Mobile</span>
+                    <span class="use-tag">Servidores</span>
+                    <span class="use-tag">Jogos</span>
+                </div>
+            </div>
+
+            <div class="language-card" onclick="openModal('java')">
+                <div class="language-header">
+                    <div class="language-icon">☕</div>
+                    <div class="language-name">Java</div>
+                </div>
+                <div class="language-year">Criada em 1995 por James Gosling</div>
+                <div class="language-description">
+                    Robusta e multiplataforma. Muito usada em grandes empresas, aplicativos Android e sistemas corporativos.
+                </div>
+                <div class="language-uses">
+                    <div class="uses-title">Principais usos:</div>
+                    <span class="use-tag">Apps Android</span>
+                    <span class="use-tag">Sistemas Empresariais</span>
+                    <span class="use-tag">Servidores</span>
+                    <span class="use-tag">Big Data</span>
+                </div>
+            </div>
+
+            <div class="language-card" onclick="openModal('cpp')">
+                <div class="language-header">
+                    <div class="language-icon">⚙️</div>
+                    <div class="language-name">C++</div>
+                </div>
+                <div class="language-year">Criada em 1985 por Bjarne Stroustrup</div>
+                <div class="language-description">
+                    Poderosa e de alto desempenho. Usada quando velocidade e controle são essenciais, como em jogos e sistemas operacionais.
+                </div>
+                <div class="language-uses">
+                    <div class="uses-title">Principais usos:</div>
+                    <span class="use-tag">Jogos AAA</span>
+                    <span class="use-tag">Sistemas Operacionais</span>
+                    <span class="use-tag">Software de Alto Desempenho</span>
+                    <span class="use-tag">IoT</span>
+                </div>
+            </div>
+
+            <div class="language-card" onclick="openModal('go')">
+                <div class="language-header">
+                    <div class="language-icon">🔷</div>
+                    <div class="language-name">Go</div>
+                </div>
+                <div class="language-year">Criada em 2009 pelo Google</div>
+                <div class="language-description">
+                    Moderna, simples e eficiente. Excelente para sistemas distribuídos, cloud computing e microsserviços.
+                </div>
+                <div class="language-uses">
+                    <div class="uses-title">Principais usos:</div>
+                    <span class="use-tag">Cloud & DevOps</span>
+                    <span class="use-tag">Microsserviços</span>
+                    <span class="use-tag">APIs</span>
+                    <span class="use-tag">Ferramentas CLI</span>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Clique em cada card para ver mais detalhes e exemplos de código!</p>
+        </footer>
+    </div>
+
+    <div id="modal" class="modal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script>
+        const languageDetails = {
+            python: {
+                name: 'Python',
+                icon: '🐍',
+                description: 'Python é conhecida por sua sintaxe clara e legível, sendo uma das melhores linguagens para iniciantes. Seu nome vem do grupo de comédia Monty Python!',
+                advantages: [
+                    'Sintaxe simples e intuitiva',
+                    'Grande comunidade e bibliotecas',
+                    'Muito versátil',
+                    'Excelente para prototipagem rápida'
+                ],
+                companies: 'Google, Instagram, Spotify, Netflix',
+                code: `# Exemplo: Hello World em Python
+print("Olá, Mundo!")
+
+# Exemplo: Lista e loop
+frutas = ["maçã", "banana", "laranja"]
+for fruta in frutas:
+    print(f"Eu gosto de {fruta}")`
+            },
+            javascript: {
+                name: 'JavaScript',
+                icon: '⚡',
+                description: 'JavaScript é a linguagem que dá vida aos sites! Originalmente criada em apenas 10 dias, hoje é uma das linguagens mais populares do mundo.',
+                advantages: [
+                    'Roda em qualquer navegador',
+                    'Enorme ecossistema (npm)',
+                    'Full-stack (frontend e backend)',
+                    'Comunidade gigantesca'
+                ],
+                companies: 'Facebook, LinkedIn, Uber, Airbnb',
+                code: `// Exemplo: Hello World em JavaScript
+console.log("Olá, Mundo!");
+
+// Exemplo: Função e array
+const frutas = ["maçã", "banana", "laranja"];
+frutas.forEach(fruta => {
+    console.log(\`Eu gosto de \${fruta}\`);
+});`
+            },
+            java: {
+                name: 'Java',
+                icon: '☕',
+                description: 'Java segue o princípio "Write Once, Run Anywhere" - escreva uma vez, rode em qualquer lugar. É uma das linguagens mais usadas no mundo corporativo.',
+                advantages: [
+                    'Multiplataforma (JVM)',
+                    'Fortemente tipada e segura',
+                    'Excelente para grandes projetos',
+                    'Mercado de trabalho amplo'
+                ],
+                companies: 'Amazon, LinkedIn, eBay, Minecraft',
+                code: `// Exemplo: Hello World em Java
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Olá, Mundo!");
+        
+        String[] frutas = {"maçã", "banana", "laranja"};
+        for (String fruta : frutas) {
+            System.out.println("Eu gosto de " + fruta);
+        }
+    }
+}`
+            },
+            cpp: {
+                name: 'C++',
+                icon: '⚙️',
+                description: 'C++ combina programação de baixo nível com recursos modernos. É a escolha principal quando performance máxima é necessária.',
+                advantages: [
+                    'Controle total sobre memória',
+                    'Performance excepcional',
+                    'Orientação a objetos',
+                    'Usada em software crítico'
+                ],
+                companies: 'Microsoft, Adobe, Epic Games, SpaceX',
+                code: `// Exemplo: Hello World em C++
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    cout << "Olá, Mundo!" << endl;
+    
+    vector<string> frutas = {"maçã", "banana", "laranja"};
+    for (const auto& fruta : frutas) {
+        cout << "Eu gosto de " << fruta << endl;
+    }
+    return 0;
+}`
+            },
+            go: {
+                name: 'Go',
+                icon: '🔷',
+                description: 'Go (ou Golang) foi criada pelo Google para ser simples, eficiente e produtiva. É perfeita para sistemas modernos que precisam lidar com muitas tarefas simultâneas.',
+                advantages: [
+                    'Compilação muito rápida',
+                    'Excelente para concorrência',
+                    'Sintaxe limpa e moderna',
+                    'Deploy simples (binário único)'
+                ],
+                companies: 'Google, Uber, Dropbox, Docker',
+                code: `// Exemplo: Hello World em Go
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Olá, Mundo!")
+    
+    frutas := []string{"maçã", "banana", "laranja"}
+    for _, fruta := range frutas {
+        fmt.Printf("Eu gosto de %s\\n", fruta)
+    }
+}`
+            }
+        };
+
+        function openModal(lang) {
+            const details = languageDetails[lang];
+            const modal = document.getElementById('modal');
+            const modalBody = document.getElementById('modal-body');
+            
+            modalBody.innerHTML = `
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <div style="font-size: 4em;">${details.icon}</div>
+                    <h2>${details.name}</h2>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>📖 Sobre</h3>
+                    <p>${details.description}</p>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>✨ Vantagens</h3>
+                    <ul style="line-height: 1.8;">
+                        ${details.advantages.map(adv => `<li>${adv}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>🏢 Empresas que usam</h3>
+                    <p>${details.companies}</p>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>💻 Exemplo de código</h3>
+                    <div class="code-example">${details.code}</div>
+                </div>
+            `;
+            
+            modal.style.display = 'flex';
+        }
+
+        function closeModal(event) {
+            const modal = document.getElementById('modal');
+            modal.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
